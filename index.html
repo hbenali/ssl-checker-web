@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSL Chain Checker</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>SSL Chain Checker</h1>
+    <p>Check your TLS certificate chain quickly</p>
+  </header>
+
+  <main>
+    <section id="checker">
+      <form id="checkForm">
+        <input type="text" id="hostname" placeholder="Enter domain (e.g. example.com)" required>
+        <button type="submit">Check</button>
+      </form>
+      <div id="feedback" class="hidden"></div>
+    </section>
+
+    <section id="results" class="hidden">
+      <div id="certDetails" class="card"></div>
+      <div id="chainRecommendation" class="card hidden"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Powered by <a href="https://www.sslmate.com/">SSLMate API</a></p>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+/* assets/css/style.css */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  margin: 0;
+  background: #f4f6f8;
+  color: #222;
+}
+
+header {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  color: white;
+}
+
+header h1 {
+  margin-bottom: 0.3rem;
+  font-size: 2rem;
+}
+
+header p {
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+main {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: 0.2s border-color;
+}
+
+input[type="text"]:focus {
+  border-color: #4e54c8;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  background: #4e54c8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s background;
+}
+
+button:hover {
+  background: #3b3fc1;
+}
+
+.hidden {
+  display: none;
+}
+
+.card {
+  background: #fff;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.trusted {
+  background: #28a745;
+}
+
+.untrusted {
+  background: #dc3545;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+  font-family: monospace;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+}
+
+.copy-btn {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #4e54c8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s background;
+}
+
+.copy-btn:hover {
+  background: #3b3fc1;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
