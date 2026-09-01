@@ -3,32 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SSL Chain Checker</title>
+  <title>SSL Chain Checker — TLS Certificate Chain Validator</title>
+  <meta name="description" content="Free SSL/TLS certificate chain checker. Instantly verify whether a domain's certificate chain is trusted and complete, and get the correct chain to install if it isn't.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ssl.hbenali.ovh/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SSL Chain Checker — TLS Certificate Chain Validator">
+  <meta property="og:description" content="Verify whether a domain's TLS certificate chain is trusted and complete, and get the correct chain to install if it isn't.">
+  <meta property="og:url" content="https://ssl.hbenali.ovh/">
+  <meta property="og:site_name" content="SSL Chain Checker">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://ssl.hbenali.ovh/favicon.svg">
+  <meta property="og:image:type" content="image/svg+xml">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SSL Chain Checker — TLS Certificate Chain Validator">
+  <meta name="twitter:description" content="Verify whether a domain's TLS certificate chain is trusted and complete, and get the correct chain to install if it isn't.">
+  <meta name="twitter:image" content="https://ssl.hbenali.ovh/favicon.svg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#4e54c8">
+
+  <!-- SSLMate's API is only hit on-demand after a check -->
+  <link rel="dns-prefetch" href="https://web.api.sslmate.com">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "url": "https://ssl.hbenali.ovh/",
+        "name": "SSL Chain Checker",
+        "description": "Free SSL/TLS certificate chain checker and validator.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://ssl.hbenali.ovh/?host={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebApplication",
+        "name": "SSL Chain Checker",
+        "url": "https://ssl.hbenali.ovh/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "description": "Check whether a domain's TLS certificate chain is trusted and complete, and get the correct chain to install if it isn't.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <header>
-    <h1>SSL Chain Checker</h1>
-    <p>Check your TLS certificate chain quickly</p>
-  </header>
+  <div class="top-bar">
+    <header>
+      <h1>🔒 SSL Chain Checker</h1>
+      <p>Check your TLS certificate chain quickly</p>
+    </header>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+  </div>
 
   <main>
     <section id="checker">
+      <h2 class="sr-only">Check a certificate chain</h2>
       <form id="checkForm">
-        <input type="text" id="hostname" placeholder="Enter domain (e.g. example.com)" required>
+        <label for="hostname" class="sr-only">Domain name</label>
+        <input type="text" id="hostname" placeholder="Enter domain (e.g. example.com)" autocomplete="off" spellcheck="false" required>
         <button type="submit">Check</button>
       </form>
-      <div id="feedback" class="hidden"></div>
+      <div id="feedback" class="hidden" aria-live="polite"></div>
     </section>
 
-    <section id="results" class="hidden">
+    <section id="results" class="hidden" aria-live="polite">
       <div id="certDetails" class="card"></div>
       <div id="chainRecommendation" class="card hidden"></div>
     </section>
   </main>
 
   <footer>
-    <p>Powered by <a href="https://www.sslmate.com/">SSLMate API</a></p>
+    <p>Powered by <a href="https://www.sslmate.com/" target="_blank" rel="noopener noreferrer">SSLMate API</a> · <a href="https://hbenali.ovh" target="_blank" rel="noopener noreferrer">hbenali.ovh</a></p>
   </footer>
 
   <script src="assets/js/main.js"></script>
