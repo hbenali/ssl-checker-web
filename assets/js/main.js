@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <h3>Recommended Certificate Chain</h3>
           <textarea readonly>${escapeHtml(result.better_chain || "")}</textarea>
           <div class="btn-row">
-            <button class="copy-btn" id="copyChainBtn" type="button">Copy Chain</button>
+            <button class="copy-btn" id="copyChainBtn" type="button">Copy Full Chain</button>
             <button class="copy-btn" id="downloadChainBtn" type="button">Download Full Chain (.pem)</button>
           </div>
         `;
@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             try {
               await navigator.clipboard.writeText(textarea.value);
-              flashInlineFeedback(chainRecommendation, "Certificate chain copied!");
+              flashInlineFeedback(chainRecommendation, "Full certificate chain copied!");
             } catch (e) {
               textarea.select();
               flashInlineFeedback(chainRecommendation, "Couldn't copy automatically — text is selected, press Ctrl/Cmd+C.");
