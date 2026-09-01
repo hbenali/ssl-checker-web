@@ -8,6 +8,8 @@
   --header-grad-2: #6a70e0;
   --accent: #4e54c8;
   --accent-hover: #3b3fc1;
+  --accent-solid: #4e54c8;
+  --accent-solid-hover: #3b3fc1;
   --input-bg: #fff;
   --input-border: #ccc;
   --shadow: rgba(0, 0, 0, 0.08);
@@ -25,6 +27,8 @@
     --header-grad-2: #5a60d0;
     --accent: #6a70e0;
     --accent-hover: #8085e8;
+    --accent-solid: #5a60d0;
+    --accent-solid-hover: #4448b5;
     --input-bg: #1b1f2e;
     --input-border: #333a52;
     --shadow: rgba(0, 0, 0, 0.4);
@@ -42,6 +46,8 @@
   --header-grad-2: #5a60d0;
   --accent: #6a70e0;
   --accent-hover: #8085e8;
+  --accent-solid: #5a60d0;
+  --accent-solid-hover: #4448b5;
   --input-bg: #1b1f2e;
   --input-border: #333a52;
   --shadow: rgba(0, 0, 0, 0.4);
@@ -152,7 +158,7 @@ input[type="text"]:focus {
 button {
   padding: 0.6rem 1rem;
   font-size: 1rem;
-  background: var(--accent);
+  background: var(--accent-solid);
   color: white;
   border: none;
   border-radius: 8px;
@@ -161,7 +167,7 @@ button {
 }
 
 button:hover {
-  background: var(--accent-hover);
+  background: var(--accent-solid-hover);
 }
 
 .hidden {
@@ -230,7 +236,7 @@ textarea {
 .copy-btn {
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
-  background: var(--accent);
+  background: var(--accent-solid);
   color: white;
   border: none;
   border-radius: 8px;
@@ -239,7 +245,7 @@ textarea {
 }
 
 .copy-btn:hover {
-  background: var(--accent-hover);
+  background: var(--accent-solid-hover);
 }
 
 footer {

@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(normalizeInput, 0);
   });
 
-  const hostParam = getQueryParam("host");
+  const hostParam = getQueryParam("hostname");
 
   if (hostParam) {
 
@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const shareUrl =
             window.location.origin +
             window.location.pathname +
-            "?host=" +
+            "?hostname=" +
             encodeURIComponent(hostname);
 
           try {
