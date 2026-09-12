@@ -8,6 +8,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const hostnameInput = document.getElementById("hostname");
   const themeToggle = document.getElementById("themeToggle");
 
+  const tabDomain = document.getElementById("tabDomain");
+  const tabCert = document.getElementById("tabCert");
+  const checkerSection = document.getElementById("checker");
+  const resultsSection = document.getElementById("results");
+  const certCheckerSection = document.getElementById("certChecker");
+  const certForm = document.getElementById("certForm");
+  const certInput = document.getElementById("certInput");
+  const certFile = document.getElementById("certFile");
+  const includeRoot = document.getElementById("includeRoot");
+  const certFeedback = document.getElementById("certFeedback");
+  const certResults = document.getElementById("certResults");
+
   // ---------- Theme ----------
   const THEME_KEY = "sslCheckerTheme";
 
@@ -130,6 +142,143 @@ document.addEventListener("DOMContentLoaded", function () {
     checkCertificate(hostname);
 
   });
+
+  // ---------- Mode tabs (by domain / by certificate) ----------
+  // The domain results panel keeps whatever visibility checkCertificate() last gave it —
+  // we only ever forcibly hide it while the certificate tab is active.
+  function setMode(mode) {
+    const isCert = mode === "cert";
+    tabDomain.classList.toggle("active", !isCert);
+    tabCert.classList.toggle("active", isCert);
+    tabDomain.setAttribute("aria-selected", String(!isCert));
+    tabCert.setAttribute("aria-selected", String(isCert));
+    checkerSection.classList.toggle("hidden", isCert);
+    certCheckerSection.classList.toggle("hidden", !isCert);
+    if (isCert) resultsSection.classList.add("hidden");
+    else if (certDetails.innerHTML) resultsSection.classList.remove("hidden");
+  }
+
+  tabDomain.addEventListener("click", () => setMode("domain"));
+  tabCert.addEventListener("click", () => setMode("cert"));
+
+  // ---------- By certificate: file upload ----------
+  if (certFile) {
+    certFile.addEventListener("change", function () {
+      const file = certFile.files && certFile.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+
+      reader.onload = function () {
+        certInput.value = String(reader.result || "").trim();
+      };
+
+      reader.onerror = function () {
+        flashInlineFeedback(certForm, "Couldn't read that file — paste the certificate instead.");
+      };
+
+      reader.readAsText(file);
+    });
+  }
+
+  // ---------- By certificate: generate chain ----------
+  if (certForm) {
+    certForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      generateChainFromCert(certInput.value.trim(), !!(includeRoot && includeRoot.checked));
+    });
+  }
+
+  async function generateChainFromCert(certPem, wantRoot) {
+
+    if (!certPem) return;
+
+    certFeedback.textContent = "Generating chain...";
+    certFeedback.classList.remove("hidden");
+    certResults.classList.add("hidden");
+    certResults.innerHTML = "";
+
+    try {
+
+      const body = new URLSearchParams({
+        include_leaf: "1",
+        cert_pem: certPem,
+        submit_btn: "Generate Chain"
+      });
+
+      if (wantRoot) body.set("include_root", "1");
+
+      const res = await fetch("https://web.api.sslmate.com/whatsmychaincert/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString()
+      });
+
+      const text = await res.text();
+
+      if (!res.ok) {
+        throw new Error(text.trim() || `HTTP ${res.status}`);
+      }
+
+      certResults.innerHTML = `
+        <h3>Generated Certificate Chain</h3>
+        <textarea readonly>${escapeHtml(text)}</textarea>
+        <div class="btn-row">
+          <button class="copy-btn" id="copyCertChainBtn" type="button">Copy Full Chain</button>
+          <button class="copy-btn" id="downloadCertChainBtn" type="button">Download Full Chain (.pem)</button>
+        </div>
+      `;
+
+      certResults.classList.remove("hidden");
+
+      const copyBtn = document.getElementById("copyCertChainBtn");
+
+      if (copyBtn) {
+        copyBtn.addEventListener("click", async function () {
+          const textarea = certResults.querySelector("textarea");
+          try {
+            await navigator.clipboard.writeText(textarea.value);
+            flashInlineFeedback(certResults, "Full certificate chain copied!");
+          } catch (e) {
+            textarea.select();
+            flashInlineFeedback(certResults, "Couldn't copy automatically — text is selected, press Ctrl/Cmd+C.");
+          }
+        });
+      }
+
+      const downloadBtn = document.getElementById("downloadCertChainBtn");
+
+      if (downloadBtn) {
+        downloadBtn.addEventListener("click", function () {
+          const chainText = certResults.querySelector("textarea").value;
+          const blob = new Blob([chainText], { type: "application/x-pem-file" });
+          const url = URL.createObjectURL(blob);
+
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "full-chain.pem";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+
+          URL.revokeObjectURL(url);
+
+          flashInlineFeedback(certResults, "Downloaded as full-chain.pem");
+        });
+      }
+
+    } catch (err) {
+
+      certResults.innerHTML = `<p style="color:var(--untrusted);">${escapeHtml(err.message)}</p>`;
+      certResults.classList.remove("hidden");
+
+    } finally {
+
+      certFeedback.classList.add("hidden");
+
+    }
+
+  }
 
   // shows a small transient inline confirmation instead of a blocking alert()
   function flashInlineFeedback(container, message) {

@@ -87,8 +87,13 @@
   </div>
 
   <main>
-    <section id="checker">
-      <h2 class="sr-only">Check a certificate chain</h2>
+    <div class="mode-tabs" role="tablist" aria-label="Check method">
+      <button type="button" class="mode-tab active" id="tabDomain" role="tab" aria-selected="true" aria-controls="checker">By domain</button>
+      <button type="button" class="mode-tab" id="tabCert" role="tab" aria-selected="false" aria-controls="certChecker">By certificate</button>
+    </div>
+
+    <section id="checker" role="tabpanel" aria-labelledby="tabDomain">
+      <h2 class="sr-only">Check a certificate chain by domain</h2>
       <form id="checkForm">
         <label for="hostname" class="sr-only">Domain name</label>
         <input type="text" id="hostname" placeholder="Enter domain (e.g. example.com)" autocomplete="off" spellcheck="false" required>
@@ -100,6 +105,27 @@
     <section id="results" class="hidden" aria-live="polite">
       <div id="certDetails" class="card"></div>
       <div id="chainRecommendation" class="card hidden"></div>
+    </section>
+
+    <section id="certChecker" class="hidden" role="tabpanel" aria-labelledby="tabCert">
+      <h2 class="sr-only">Generate a chain from your own certificate</h2>
+      <p class="hint">Paste your leaf certificate (PEM), or upload a .pem/.crt/.cer file, to get the correct chain to install.</p>
+      <form id="certForm">
+        <label for="certInput" class="sr-only">Certificate (PEM)</label>
+        <textarea id="certInput" placeholder="-----BEGIN CERTIFICATE-----&#10;...&#10;-----END CERTIFICATE-----" spellcheck="false" required></textarea>
+        <div class="cert-form-row">
+          <label class="file-btn">
+            📁 Upload file
+            <input type="file" id="certFile" accept=".pem,.crt,.cer,.txt">
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="includeRoot"> Include root certificate
+          </label>
+          <button type="submit">Generate Chain</button>
+        </div>
+      </form>
+      <div id="certFeedback" class="hidden" aria-live="polite"></div>
+      <div id="certResults" class="card hidden" aria-live="polite"></div>
     </section>
   </main>
 
