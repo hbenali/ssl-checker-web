@@ -6,115 +6,30 @@
   <title>404 · Page not found · SSL Chain Checker</title>
   <meta name="description" content="The page you're looking for doesn't exist. Head back to SSL Chain Checker to verify a domain's TLS certificate chain.">
   <meta name="robots" content="noindex, follow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="alternate icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <meta name="theme-color" content="#4e54c8">
+  <meta name="theme-color" content="#0c1218">
 
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --bg: #f4f6f8;
-      --text: #222;
-      --text-muted: #666;
-      --card-bg: #fff;
-      --accent: #4e54c8;
-      --accent-hover: #3b3fc1;
-      --input-border: #ccc;
-      --shadow: rgba(0, 0, 0, 0.08);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        --bg: #12141f;
-        --text: #e8e8f2;
-        --text-muted: #9aa0c0;
-        --card-bg: #1b1f2e;
-        --accent: #6a70e0;
-        --accent-hover: #8085e8;
-        --input-border: #333a52;
-        --shadow: rgba(0, 0, 0, 0.4);
-      }
-    }
-
-    :root[data-theme="dark"] {
-      --bg: #12141f;
-      --text: #e8e8f2;
-      --text-muted: #9aa0c0;
-      --card-bg: #1b1f2e;
-      --accent: #6a70e0;
-      --accent-hover: #8085e8;
-      --input-border: #333a52;
-      --shadow: rgba(0, 0, 0, 0.4);
-    }
-
-    body {
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      padding: 3rem;
-      border-radius: 16px;
-      text-align: center;
-      max-width: 480px;
-      width: 100%;
-      box-shadow: 0 4px 20px var(--shadow);
-    }
-
-    .error-code {
-      font-size: 5rem;
-      font-weight: 700;
-      color: var(--accent);
-      line-height: 1;
-    }
-
-    h1 { margin: 1rem 0 0.5rem; font-size: 1.5rem; }
-    p { color: var(--text-muted); margin-bottom: 2rem; }
-
-    .btn {
-      display: inline-block;
-      background: var(--accent);
-      color: white;
-      padding: 0.8rem 2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
-
-    .btn:hover { background: var(--accent-hover); }
-
-    footer { margin-top: 2rem; font-size: 0.85rem; color: var(--text-muted); }
-    footer a { color: var(--text-muted); text-decoration: underline; }
-    footer a:hover { color: var(--accent); }
-  </style>
+  <!-- Absolute paths: this page is served for any missing URL, at any depth -->
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/big-shoulders-latin-wght.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/newsreader-latin-wght.woff2" crossorigin>
+  <link rel="stylesheet" href="/site.css">
 </head>
 <body>
-  <div class="card">
-    <div class="error-code">404</div>
-    <h1>Page not found</h1>
-    <p>The page you're looking for doesn't exist or has been moved.</p>
-    <a href="/" class="btn">← Back to SSL Chain Checker</a>
-    <footer>ssl.hbenali.ovh · <a href="https://hbenali.ovh" target="_blank" rel="noopener noreferrer">hbenali.ovh</a></footer>
-  </div>
-
-  <script>
-    try {
-      var theme = localStorage.getItem('sslCheckerTheme');
-      if (theme === 'light' || theme === 'dark') {
-        document.documentElement.setAttribute('data-theme', theme);
-      }
-    } catch (e) {}
-  </script>
+  <main class="nf wrap">
+    <p class="display nf-code" aria-hidden="true">404</p>
+    <h1 class="display">Page not found</h1>
+    <p class="nf-lead">The page you're looking for doesn't exist or has been moved.</p>
+    <ul class="nf-links">
+      <li><a class="btn" href="/">Back to SSL Chain Checker</a></li>
+    </ul>
+    <footer>
+      <p><span>ssl.hbenali.ovh</span> <a href="https://hbenali.ovh" target="_blank" rel="noopener noreferrer">hbenali.ovh</a></p>
+    </footer>
+  </main>
 </body>
 </html>

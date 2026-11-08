@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const certDetails = document.getElementById("certDetails");
   const chainRecommendation = document.getElementById("chainRecommendation");
   const hostnameInput = document.getElementById("hostname");
-  const themeToggle = document.getElementById("themeToggle");
 
   const tabDomain = document.getElementById("tabDomain");
   const tabCert = document.getElementById("tabCert");
@@ -19,39 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const includeRoot = document.getElementById("includeRoot");
   const certFeedback = document.getElementById("certFeedback");
   const certResults = document.getElementById("certResults");
-
-  // ---------- Theme ----------
-  const THEME_KEY = "sslCheckerTheme";
-
-  function getStoredTheme() {
-    try { return localStorage.getItem(THEME_KEY); } catch (e) { return null; }
-  }
-
-  function effectiveTheme() {
-    const stored = getStoredTheme();
-    if (stored === "light" || stored === "dark") return stored;
-    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  }
-
-  function applyTheme() {
-    const stored = getStoredTheme();
-    if (stored === "light" || stored === "dark") {
-      document.documentElement.setAttribute("data-theme", stored);
-    } else {
-      document.documentElement.removeAttribute("data-theme");
-    }
-    if (themeToggle) themeToggle.textContent = effectiveTheme() === "dark" ? "☀️" : "🌙";
-  }
-
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      const next = effectiveTheme() === "dark" ? "light" : "dark";
-      try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
-      applyTheme();
-    });
-  }
-
-  applyTheme();
 
   // ---------- Session ----------
   function getSessionId() {
@@ -222,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       certResults.innerHTML = `
         <h3>Generated Certificate Chain</h3>
-        <textarea readonly>${escapeHtml(text)}</textarea>
+        <textarea readonly aria-label="Generated certificate chain (PEM)">${escapeHtml(text)}</textarea>
         <div class="btn-row">
           <button class="copy-btn" id="copyCertChainBtn" type="button">Copy Full Chain</button>
           <button class="copy-btn" id="downloadCertChainBtn" type="button">Download Full Chain (.pem)</button>
@@ -269,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     } catch (err) {
 
-      certResults.innerHTML = `<p style="color:var(--untrusted);">${escapeHtml(err.message)}</p>`;
+      certResults.innerHTML = `<p class="error-text">${escapeHtml(err.message)}</p>`;
       certResults.classList.remove("hidden");
 
     } finally {
@@ -370,7 +336,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         chainRecommendation.innerHTML = `
           <h3>Recommended Certificate Chain</h3>
-          <textarea readonly>${escapeHtml(result.better_chain || "")}</textarea>
+          <textarea readonly aria-label="Recommended certificate chain (PEM)">${escapeHtml(result.better_chain || "")}</textarea>
           <div class="btn-row">
             <button class="copy-btn" id="copyChainBtn" type="button">Copy Full Chain</button>
             <button class="copy-btn" id="downloadChainBtn" type="button">Download Full Chain (.pem)</button>
@@ -435,7 +401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       results.classList.remove("hidden");
 
-      certDetails.innerHTML = `<p style="color:var(--untrusted);">Error: ${escapeHtml(err.message)}</p>`;
+      certDetails.innerHTML = `<p class="error-text">Error: ${escapeHtml(err.message)}</p>`;
 
       if (chainRecommendation) {
         chainRecommendation.innerHTML = "";

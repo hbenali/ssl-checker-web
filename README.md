@@ -2,7 +2,7 @@
 
 A free, single-page SSL/TLS certificate chain checker. Verify whether a domain's certificate chain is trusted and complete, and get the correct chain to install if it isn't. Live at [ssl.hbenali.ovh](https://ssl.hbenali.ovh).
 
-No backend, no build step — a static `index.html` plus `assets/css` and `assets/js`, calling a public API directly from the browser.
+No backend, no build step — a static `index.html` plus `site.css`, `fonts/` and `assets/js`, calling a public API directly from the browser.
 
 ## Features
 
@@ -10,7 +10,7 @@ No backend, no build step — a static `index.html` plus `assets/css` and `asset
 - **Trust status** — flags untrusted or expired chains
 - **Recommended chain** — get the correct intermediate chain to install when it's broken, with one-click copy
 - **Shareable links** — copy a link that reopens the same check
-- **Dark mode** with persisted preference
+- **Dark editorial design**, self-hosted fonts, no third-party requests except the SSLMate API
 - Fully responsive and accessible (labeled fields, live regions, WCAG AA contrast)
 
 ## Running locally

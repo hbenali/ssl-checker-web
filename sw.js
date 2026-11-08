@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ssl-chain-checker-v1';
+const CACHE_NAME = 'ssl-chain-checker-v2';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
@@ -9,7 +9,10 @@ const PRECACHE_URLS = [
   '/apple-touch-icon.png',
   '/icon-192.png',
   '/icon-512.png',
-  '/assets/css/style.css',
+  '/site.css',
+  '/fonts/big-shoulders-latin-wght.woff2',
+  '/fonts/newsreader-latin-wght.woff2',
+  '/fonts/jetbrains-mono-latin-wght.woff2',
   '/assets/js/main.js'
 ];
 

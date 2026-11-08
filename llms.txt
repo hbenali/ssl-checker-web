@@ -2,7 +2,7 @@
 
 > Free, single-page tool to verify whether a domain's TLS certificate chain is trusted and complete.
 
-Static site (no backend, no build step) at https://ssl.hbenali.ovh — `index.html` plus `assets/css` and `assets/js`, calling a public API directly from the browser. Flags untrusted or expired chains and suggests the correct intermediate chain to install when one is broken, with one-click copy and shareable result links.
+Static site (no backend, no build step) at https://ssl.hbenali.ovh — `index.html` plus `site.css`, `fonts/` and `assets/js`, calling a public API directly from the browser. Flags untrusted or expired chains and suggests the correct intermediate chain to install when one is broken, with one-click copy and shareable result links.
 
 ## Pages
 - [SSL Chain Checker](https://ssl.hbenali.ovh/): the tool itself.

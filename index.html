@@ -32,11 +32,11 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="alternate icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <meta name="theme-color" content="#4e54c8">
+  <meta name="theme-color" content="#0c1218">
   <link rel="manifest" href="/manifest.json">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="SSL Chain Checker">
 
   <!-- SSLMate's API is only hit on-demand after a check -->
@@ -75,18 +75,18 @@
   }
   </script>
 
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/big-shoulders-latin-wght.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/newsreader-latin-wght.woff2" crossorigin>
+  <link rel="stylesheet" href="/site.css">
 </head>
 <body>
-  <div class="top-bar">
-    <header>
-      <h1>🔒 SSL Chain Checker</h1>
-      <p>Check your TLS certificate chain quickly</p>
-    </header>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
-  </div>
+  <a class="skip" href="#main">Skip to the checker</a>
+  <header class="hero wrap">
+    <h1 class="display"><span class="line"><span>SSL Chain</span></span><span class="line"><span>Checker</span></span></h1>
+    <p class="lead">Check your TLS certificate chain quickly</p>
+  </header>
 
-  <main>
+  <main id="main" class="wrap">
     <div class="mode-tabs" role="tablist" aria-label="Check method">
       <button type="button" class="mode-tab active" id="tabDomain" role="tab" aria-selected="true" aria-controls="checker">By domain</button>
       <button type="button" class="mode-tab" id="tabCert" role="tab" aria-selected="false" aria-controls="certChecker">By certificate</button>
@@ -115,7 +115,7 @@
         <textarea id="certInput" placeholder="-----BEGIN CERTIFICATE-----&#10;...&#10;-----END CERTIFICATE-----" spellcheck="false" required></textarea>
         <div class="cert-form-row">
           <label class="file-btn">
-            📁 Upload file
+            Upload file
             <input type="file" id="certFile" accept=".pem,.crt,.cer,.txt">
           </label>
           <label class="checkbox-label">
@@ -130,7 +130,7 @@
   </main>
 
   <footer>
-    <p>Powered by <a href="https://www.sslmate.com/" target="_blank" rel="noopener noreferrer">SSLMate API</a> · <a href="https://hbenali.ovh" target="_blank" rel="noopener noreferrer">hbenali.ovh</a></p>
+    <p><span>Powered by <a href="https://www.sslmate.com/" target="_blank" rel="noopener noreferrer">SSLMate API</a></span> <a href="https://hbenali.ovh" target="_blank" rel="noopener noreferrer">hbenali.ovh</a></p>
   </footer>
 
   <script src="assets/js/main.js"></script>
