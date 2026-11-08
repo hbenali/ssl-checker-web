@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ssl-chain-checker-v2';
+const CACHE_NAME = 'ssl-chain-checker-v3';
 const PRECACHE_URLS = [
   '/',
   '/index.html',

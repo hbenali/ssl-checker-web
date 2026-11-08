@@ -32,6 +32,8 @@
     --sodium: #e9a23b;
     --verdigris: #5db7a0;
     --fail: #e5776f;
+    --glow: rgba(233, 162, 59, 0.2);
+    --glow-soft: rgba(233, 162, 59, 0.06);
 
     --display: 'Big Shoulders', 'Arial Narrow', Impact, sans-serif;
     --serif: 'Newsreader', Georgia, serif;
@@ -39,6 +41,25 @@
 
     --gutter: clamp(1.5rem, 4vw, 2.5rem);
     color-scheme: dark;
+}
+
+/* Light: follows the system setting, no toggle. Dark above is the default and the identity.
+   Contrast on --ink (page) / --slate (surface): text 16/14.7, muted 6.0/5.4, accent 5.5/4.9,
+   ok 5.2/4.7, fail 5.7/5.1; paper text on accent buttons 5.5. */
+@media (prefers-color-scheme: light) {
+    :root {
+        --ink: #f4efe4;
+        --slate: #e9e3d4;
+        --line: #cbc3b0;
+        --bone: #0c1218;
+        --mist: #4f5b67;
+        --sodium: #8a5300;
+        --verdigris: #1b7058;
+        --fail: #b3261e;
+        --glow: rgba(233, 162, 59, 0.22);
+        --glow-soft: rgba(233, 162, 59, 0.07);
+        color-scheme: light;
+    }
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -96,7 +117,7 @@ ul { list-style: none; }
 .hero::before {
     content: ''; position: absolute; z-index: -1; top: -14rem; right: -12rem;
     width: min(42rem, 140vw); aspect-ratio: 1; border-radius: 50%;
-    background: radial-gradient(closest-side, rgba(233, 162, 59, 0.2), rgba(233, 162, 59, 0.06) 55%, transparent);
+    background: radial-gradient(closest-side, var(--glow), var(--glow-soft) 55%, transparent);
     pointer-events: none;
 }
 .hero h1 { font-size: clamp(3.4rem, 15vw, 9rem); margin-left: -0.03em; }
@@ -200,7 +221,7 @@ footer p { display: contents; }
 .nf { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-block: 5rem 3rem; position: relative; isolation: isolate; overflow: hidden; }
 .nf::before {
     content: ''; position: absolute; z-index: -1; top: -12rem; right: -10rem; width: min(40rem, 140vw); aspect-ratio: 1; border-radius: 50%;
-    background: radial-gradient(closest-side, rgba(233, 162, 59, 0.2), rgba(233, 162, 59, 0.06) 55%, transparent);
+    background: radial-gradient(closest-side, var(--glow), var(--glow-soft) 55%, transparent);
 }
 .nf-code { font-size: clamp(9rem, 34vw, 24rem); color: var(--sodium); }
 .nf h1 { font-size: clamp(2.8rem, 7vw, 5rem); margin-top: 0.5rem; }
