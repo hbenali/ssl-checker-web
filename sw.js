@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ssl-chain-checker-v3';
+const CACHE_NAME = 'ssl-chain-checker-v4';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
@@ -10,6 +10,7 @@ const PRECACHE_URLS = [
   '/icon-192.png',
   '/icon-512.png',
   '/site.css',
+  '/theme.js',
   '/fonts/big-shoulders-latin-wght.woff2',
   '/fonts/newsreader-latin-wght.woff2',
   '/fonts/jetbrains-mono-latin-wght.woff2',
